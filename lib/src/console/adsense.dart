@@ -4,18 +4,18 @@ part of adsense_v1_1_api_console;
 /** Gives AdSense publishers access to their inventory and the ability to generate reports */
 class Adsense extends ConsoleClient {
 
-  AccountsResource _accounts;
-  AccountsResource get accounts => _accounts;
-  AdclientsResource _adclients;
-  AdclientsResource get adclients => _adclients;
-  AdunitsResource _adunits;
-  AdunitsResource get adunits => _adunits;
-  CustomchannelsResource _customchannels;
-  CustomchannelsResource get customchannels => _customchannels;
-  ReportsResource _reports;
-  ReportsResource get reports => _reports;
-  UrlchannelsResource _urlchannels;
-  UrlchannelsResource get urlchannels => _urlchannels;
+  AccountsResource_ _accounts;
+  AccountsResource_ get accounts => _accounts;
+  AdclientsResource_ _adclients;
+  AdclientsResource_ get adclients => _adclients;
+  AdunitsResource_ _adunits;
+  AdunitsResource_ get adunits => _adunits;
+  CustomchannelsResource_ _customchannels;
+  CustomchannelsResource_ get customchannels => _customchannels;
+  ReportsResource_ _reports;
+  ReportsResource_ get reports => _reports;
+  UrlchannelsResource_ _urlchannels;
+  UrlchannelsResource_ get urlchannels => _urlchannels;
 
   /** OAuth Scope2: View and manage your AdSense data */
   static const core.String ADSENSE_SCOPE = "https://www.googleapis.com/auth/adsense";
@@ -75,11 +75,11 @@ class Adsense extends ConsoleClient {
   Adsense([oauth2.OAuth2Console auth]) : super(auth) {
     basePath = "/adsense/v1.1/";
     rootUrl = "https://www.googleapis.com:443/";
-    _accounts = new AccountsResource(this);
-    _adclients = new AdclientsResource(this);
-    _adunits = new AdunitsResource(this);
-    _customchannels = new CustomchannelsResource(this);
-    _reports = new ReportsResource(this);
-    _urlchannels = new UrlchannelsResource(this);
+    _accounts = new AccountsResource_(this);
+    _adclients = new AdclientsResource_(this);
+    _adunits = new AdunitsResource_(this);
+    _customchannels = new CustomchannelsResource_(this);
+    _reports = new ReportsResource_(this);
+    _urlchannels = new UrlchannelsResource_(this);
   }
 }
