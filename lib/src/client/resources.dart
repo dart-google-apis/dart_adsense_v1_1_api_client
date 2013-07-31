@@ -1,25 +1,22 @@
-part of adsense_v1_1_api_client;
+part of adsense_v1_1_api;
 
-class AccountsResource_ extends Resource {
+class AccountsResource_ {
 
-  AccountsAdclientsResource_ _adclients;
-  AccountsAdclientsResource_ get adclients => _adclients;
-  AccountsAdunitsResource_ _adunits;
-  AccountsAdunitsResource_ get adunits => _adunits;
-  AccountsCustomchannelsResource_ _customchannels;
-  AccountsCustomchannelsResource_ get customchannels => _customchannels;
-  AccountsReportsResource_ _reports;
-  AccountsReportsResource_ get reports => _reports;
-  AccountsUrlchannelsResource_ _urlchannels;
-  AccountsUrlchannelsResource_ get urlchannels => _urlchannels;
+  final Client _client;
 
-  AccountsResource_(Client client) : super(client) {
-  _adclients = new AccountsAdclientsResource_(client);
-  _adunits = new AccountsAdunitsResource_(client);
-  _customchannels = new AccountsCustomchannelsResource_(client);
-  _reports = new AccountsReportsResource_(client);
-  _urlchannels = new AccountsUrlchannelsResource_(client);
-  }
+  final AccountsAdclientsResource_ adclients;
+  final AccountsAdunitsResource_ adunits;
+  final AccountsCustomchannelsResource_ customchannels;
+  final AccountsReportsResource_ reports;
+  final AccountsUrlchannelsResource_ urlchannels;
+
+  AccountsResource_(Client client) :
+      _client = client,
+      adclients = new AccountsAdclientsResource_(client),
+      adunits = new AccountsAdunitsResource_(client),
+      customchannels = new AccountsCustomchannelsResource_(client),
+      reports = new AccountsReportsResource_(client),
+      urlchannels = new AccountsUrlchannelsResource_(client);
 
   /**
    * Get information about the selected AdSense account.
@@ -95,10 +92,12 @@ class AccountsResource_ extends Resource {
   }
 }
 
-class AccountsAdclientsResource_ extends Resource {
+class AccountsAdclientsResource_ {
 
-  AccountsAdclientsResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  AccountsAdclientsResource_(Client client) :
+      _client = client;
 
   /**
    * List all ad clients in the specified account.
@@ -142,14 +141,15 @@ class AccountsAdclientsResource_ extends Resource {
   }
 }
 
-class AccountsAdunitsResource_ extends Resource {
+class AccountsAdunitsResource_ {
 
-  AccountsAdunitsCustomchannelsResource_ _customchannels;
-  AccountsAdunitsCustomchannelsResource_ get customchannels => _customchannels;
+  final Client _client;
 
-  AccountsAdunitsResource_(Client client) : super(client) {
-  _customchannels = new AccountsAdunitsCustomchannelsResource_(client);
-  }
+  final AccountsAdunitsCustomchannelsResource_ customchannels;
+
+  AccountsAdunitsResource_(Client client) :
+      _client = client,
+      customchannels = new AccountsAdunitsCustomchannelsResource_(client);
 
   /**
    * Gets the specified ad unit in the specified ad client for the specified account.
@@ -241,10 +241,12 @@ class AccountsAdunitsResource_ extends Resource {
   }
 }
 
-class AccountsAdunitsCustomchannelsResource_ extends Resource {
+class AccountsAdunitsCustomchannelsResource_ {
 
-  AccountsAdunitsCustomchannelsResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  AccountsAdunitsCustomchannelsResource_(Client client) :
+      _client = client;
 
   /**
    * List all custom channels which the specified ad unit belongs to.
@@ -296,14 +298,15 @@ class AccountsAdunitsCustomchannelsResource_ extends Resource {
   }
 }
 
-class AccountsCustomchannelsResource_ extends Resource {
+class AccountsCustomchannelsResource_ {
 
-  AccountsCustomchannelsAdunitsResource_ _adunits;
-  AccountsCustomchannelsAdunitsResource_ get adunits => _adunits;
+  final Client _client;
 
-  AccountsCustomchannelsResource_(Client client) : super(client) {
-  _adunits = new AccountsCustomchannelsAdunitsResource_(client);
-  }
+  final AccountsCustomchannelsAdunitsResource_ adunits;
+
+  AccountsCustomchannelsResource_(Client client) :
+      _client = client,
+      adunits = new AccountsCustomchannelsAdunitsResource_(client);
 
   /**
    * Get the specified custom channel from the specified ad client for the specified account.
@@ -392,10 +395,12 @@ class AccountsCustomchannelsResource_ extends Resource {
   }
 }
 
-class AccountsCustomchannelsAdunitsResource_ extends Resource {
+class AccountsCustomchannelsAdunitsResource_ {
 
-  AccountsCustomchannelsAdunitsResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  AccountsCustomchannelsAdunitsResource_(Client client) :
+      _client = client;
 
   /**
    * List all ad units in the specified custom channel.
@@ -450,10 +455,12 @@ class AccountsCustomchannelsAdunitsResource_ extends Resource {
   }
 }
 
-class AccountsReportsResource_ extends Resource {
+class AccountsReportsResource_ {
 
-  AccountsReportsResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  AccountsReportsResource_(Client client) :
+      _client = client;
 
   /**
    * Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
@@ -467,8 +474,10 @@ class AccountsReportsResource_ extends Resource {
    * [currency] - Optional currency to use when reporting on monetary metrics. Defaults to the account's currency if not set.
    *
    * [dimension] - Dimensions to base the report on.
+   *   Repeated values: allowed
    *
    * [filter] - Filters to be run on the report.
+   *   Repeated values: allowed
    *
    * [locale] - Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.
    *
@@ -477,8 +486,10 @@ class AccountsReportsResource_ extends Resource {
    *   Maximum: 50000
    *
    * [metric] - Numeric columns to include in the report.
+   *   Repeated values: allowed
    *
    * [sort] - The name of a dimension or metric to sort the resulting report on, optionally prefixed with "+" to sort ascending or "-" to sort descending. If no prefix is specified, the column is sorted ascending.
+   *   Repeated values: allowed
    *
    * [startIndex] - Index of the first row of report data to return.
    *   Minimum: 0
@@ -486,7 +497,7 @@ class AccountsReportsResource_ extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  async.Future<AdsenseReportsGenerateResponse> generate(core.String accountId, core.String startDate, core.String endDate, {core.String currency, core.String dimension, core.String filter, core.String locale, core.int maxResults, core.String metric, core.String sort, core.int startIndex, core.Map optParams}) {
+  async.Future<AdsenseReportsGenerateResponse> generate(core.String accountId, core.String startDate, core.String endDate, {core.String currency, core.List<core.String> dimension, core.List<core.String> filter, core.String locale, core.int maxResults, core.List<core.String> metric, core.List<core.String> sort, core.int startIndex, core.Map optParams}) {
     var url = "accounts/{accountId}/reports";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -525,10 +536,12 @@ class AccountsReportsResource_ extends Resource {
   }
 }
 
-class AccountsUrlchannelsResource_ extends Resource {
+class AccountsUrlchannelsResource_ {
 
-  AccountsUrlchannelsResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  AccountsUrlchannelsResource_(Client client) :
+      _client = client;
 
   /**
    * List all URL channels in the specified ad client for the specified account.
@@ -576,10 +589,12 @@ class AccountsUrlchannelsResource_ extends Resource {
   }
 }
 
-class AdclientsResource_ extends Resource {
+class AdclientsResource_ {
 
-  AdclientsResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  AdclientsResource_(Client client) :
+      _client = client;
 
   /**
    * List all ad clients in this AdSense account.
@@ -619,14 +634,15 @@ class AdclientsResource_ extends Resource {
   }
 }
 
-class AdunitsResource_ extends Resource {
+class AdunitsResource_ {
 
-  AdunitsCustomchannelsResource_ _customchannels;
-  AdunitsCustomchannelsResource_ get customchannels => _customchannels;
+  final Client _client;
 
-  AdunitsResource_(Client client) : super(client) {
-  _customchannels = new AdunitsCustomchannelsResource_(client);
-  }
+  final AdunitsCustomchannelsResource_ customchannels;
+
+  AdunitsResource_(Client client) :
+      _client = client,
+      customchannels = new AdunitsCustomchannelsResource_(client);
 
   /**
    * Gets the specified ad unit in the specified ad client.
@@ -710,10 +726,12 @@ class AdunitsResource_ extends Resource {
   }
 }
 
-class AdunitsCustomchannelsResource_ extends Resource {
+class AdunitsCustomchannelsResource_ {
 
-  AdunitsCustomchannelsResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  AdunitsCustomchannelsResource_(Client client) :
+      _client = client;
 
   /**
    * List all custom channels which the specified ad unit belongs to.
@@ -761,14 +779,15 @@ class AdunitsCustomchannelsResource_ extends Resource {
   }
 }
 
-class CustomchannelsResource_ extends Resource {
+class CustomchannelsResource_ {
 
-  CustomchannelsAdunitsResource_ _adunits;
-  CustomchannelsAdunitsResource_ get adunits => _adunits;
+  final Client _client;
 
-  CustomchannelsResource_(Client client) : super(client) {
-  _adunits = new CustomchannelsAdunitsResource_(client);
-  }
+  final CustomchannelsAdunitsResource_ adunits;
+
+  CustomchannelsResource_(Client client) :
+      _client = client,
+      adunits = new CustomchannelsAdunitsResource_(client);
 
   /**
    * Get the specified custom channel from the specified ad client.
@@ -849,10 +868,12 @@ class CustomchannelsResource_ extends Resource {
   }
 }
 
-class CustomchannelsAdunitsResource_ extends Resource {
+class CustomchannelsAdunitsResource_ {
 
-  CustomchannelsAdunitsResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  CustomchannelsAdunitsResource_(Client client) :
+      _client = client;
 
   /**
    * List all ad units in the specified custom channel.
@@ -903,10 +924,12 @@ class CustomchannelsAdunitsResource_ extends Resource {
   }
 }
 
-class ReportsResource_ extends Resource {
+class ReportsResource_ {
 
-  ReportsResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  ReportsResource_(Client client) :
+      _client = client;
 
   /**
    * Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
@@ -916,12 +939,15 @@ class ReportsResource_ extends Resource {
    * [endDate] - End of the date range to report on in "YYYY-MM-DD" format, inclusive.
    *
    * [accountId] - Accounts upon which to report.
+   *   Repeated values: allowed
    *
    * [currency] - Optional currency to use when reporting on monetary metrics. Defaults to the account's currency if not set.
    *
    * [dimension] - Dimensions to base the report on.
+   *   Repeated values: allowed
    *
    * [filter] - Filters to be run on the report.
+   *   Repeated values: allowed
    *
    * [locale] - Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.
    *
@@ -930,8 +956,10 @@ class ReportsResource_ extends Resource {
    *   Maximum: 50000
    *
    * [metric] - Numeric columns to include in the report.
+   *   Repeated values: allowed
    *
    * [sort] - The name of a dimension or metric to sort the resulting report on, optionally prefixed with "+" to sort ascending or "-" to sort descending. If no prefix is specified, the column is sorted ascending.
+   *   Repeated values: allowed
    *
    * [startIndex] - Index of the first row of report data to return.
    *   Minimum: 0
@@ -939,7 +967,7 @@ class ReportsResource_ extends Resource {
    *
    * [optParams] - Additional query parameters
    */
-  async.Future<AdsenseReportsGenerateResponse> generate(core.String startDate, core.String endDate, {core.String accountId, core.String currency, core.String dimension, core.String filter, core.String locale, core.int maxResults, core.String metric, core.String sort, core.int startIndex, core.Map optParams}) {
+  async.Future<AdsenseReportsGenerateResponse> generate(core.String startDate, core.String endDate, {core.List<core.String> accountId, core.String currency, core.List<core.String> dimension, core.List<core.String> filter, core.String locale, core.int maxResults, core.List<core.String> metric, core.List<core.String> sort, core.int startIndex, core.Map optParams}) {
     var url = "reports";
     var urlParams = new core.Map();
     var queryParams = new core.Map();
@@ -977,10 +1005,12 @@ class ReportsResource_ extends Resource {
   }
 }
 
-class UrlchannelsResource_ extends Resource {
+class UrlchannelsResource_ {
 
-  UrlchannelsResource_(Client client) : super(client) {
-  }
+  final Client _client;
+
+  UrlchannelsResource_(Client client) :
+      _client = client;
 
   /**
    * List all URL channels in the specified ad client for this AdSense account.
